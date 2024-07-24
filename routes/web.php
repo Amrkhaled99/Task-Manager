@@ -19,8 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-  // ################################## tasks ##################################
-
+  // ################################## Tasks ##################################
 
    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
 
@@ -30,6 +29,6 @@ Route::get('/', function () {
     // Route to handle the creation and storage of new tasks
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
-     // ################################## tasks ##################################
+     // ################################## Statistics ##################################
     Route::get('tasks/statistics', [StatisticController::class, 'index'])->name('statistics.index');
 
