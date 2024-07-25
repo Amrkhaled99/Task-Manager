@@ -11,6 +11,11 @@
 
 </head>
 <body>
+
+
+@include('layouts.nav');
+
+
 <!-- Yield content section from child views -->
 @yield('content')
 

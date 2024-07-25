@@ -16,7 +16,6 @@ class StatisticController extends Controller
             ->orderByDesc('task_count')
             ->take(10)
             ->get();
-
         return view('statistics.index', compact('topUsers'));
     }
 }

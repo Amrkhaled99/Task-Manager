@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UpdateTaskStatistics;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,6 +39,10 @@ class TaskController extends Controller
 
         // Create a new task
         Task::create($request->all());
+
+        // Dispatch the UpdateStatisticsJob to recalculate statistics
+        UpdateTaskStatistics::dispatch();
+
 
         // Redirect to the task list page
         return redirect()->route('tasks.create');

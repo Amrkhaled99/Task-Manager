@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'description', 'assigned_by_id', 'assigned_to_id', 'status', 'due_date'
+        'title', 'description', 'assigned_by_id', 'assigned_to_id', 'due_date'
     ];
 
     public function assignedTo()
