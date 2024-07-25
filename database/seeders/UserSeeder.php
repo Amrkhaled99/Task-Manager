@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
     {
 
         // Create 10000 users using the User factory
-        User::factory(10)->create();  // Generate
+        User::factory(10000)->create();  // Generate
 
         // Create 100 admin users using the User factory
-        User::factory(1)->create(['is_admin' => true]);
+        User::factory(100)->create(['is_admin' => true]);
     }
 }
