@@ -14,6 +14,7 @@
 
 
 @include('layouts.nav');
+@include('sweetalert::alert')
 
 
 <!-- Yield content section from child views -->

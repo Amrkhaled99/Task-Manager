@@ -30,10 +30,27 @@
                             </tbody>
                         </table>
 
-                        <!-- Pagination Links -->
-                        <div class="d-flex justify-content-center">
-                            {{ $tasks->links() }}
+                        <div class="d-flex justify-content-center mt-4">
+                            <!-- Previous Page Link -->
+                            <a href="{{ $tasks->previousPageUrl() }}" class="btn btn-dark mx-1 {{ $tasks->onFirstPage() ? 'disabled' : '' }}">
+                                &laquo; Previous
+                            </a>
+
+                            <!-- Page Number Links -->
+                            @for($i = 1; $i <= $tasks->lastPage(); $i++)
+                                <a href="{{ $tasks->url($i) }}" class="btn btn-outline-dark mx-1 {{ $tasks->currentPage() == $i ? 'active' : '' }}">
+                                    {{ $i }}
+                                </a>
+                            @endfor
+
+                            <!-- Next Page Link -->
+                            <a href="{{ $tasks->nextPageUrl() }}" class="btn btn-dark mx-1 {{ !$tasks->hasMorePages() ? 'disabled' : '' }}">
+                                Next &raquo;
+                            </a>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

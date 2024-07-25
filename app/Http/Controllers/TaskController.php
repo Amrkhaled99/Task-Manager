@@ -6,6 +6,7 @@ use App\Jobs\UpdateTaskStatistics;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TaskController extends Controller
 {
@@ -47,6 +48,7 @@ class TaskController extends Controller
         UpdateTaskStatistics::dispatch();
 
         // Redirect to the list of tasks
-        return redirect()->route('tasks');
+        Alert::success('success', 'Task Created Successfully');
+        return redirect('tasks');
     }
 }
