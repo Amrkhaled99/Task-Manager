@@ -34,7 +34,6 @@ class TaskTest extends TestCase
             'assigned_by_id' => $admin->id,
         ]);
     }
-//
     public function test_task_list_pagination()
     {
         // Simulate a GET request to the task list page
@@ -43,17 +42,25 @@ class TaskTest extends TestCase
         // Verify that the response contains pagination controls like "Next"
         $response->assertSeeText('Next');
     }
+    public function test_task_list_page_loads()
+    {
+        // Create an admin user
+        $admin = User::factory()->create(['is_admin' => true]);
 
+        // Simulate a GET request to the task list page
+        $response = $this->actingAs($admin)->get('/tasks');
+
+        // Verify that the response status is 200 OK
+        $response->assertStatus(200);
+
+    }
     public function test_statistics_page()
     {
         // Simulate a GET request to the statistics page
-        $response = $this->get('/statistics');
+        $response = $this->get('/tasks/statistics');
 
-        // Check that the page contains the word "tasks" to ensure it's loaded correctly
-        $response->assertSeeText("t");
+        // Verify that the response status is 200 OK
+        $response->assertStatus(200);
     }
-
-
-
 
 }
