@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <!-- Form to create a new task -->
-                        <form action="{{ route('tasks.store') }}" method="POST">
+                        <form action="{{ route('tasks') }}" method="POST">
                             @csrf
 
                             <!-- Dropdown to select an admin who is creating the task -->

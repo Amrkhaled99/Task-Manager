@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Models\TaskStatistic;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,7 +21,7 @@ class UpdateTaskStatistics implements ShouldQueue
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -32,9 +31,10 @@ class UpdateTaskStatistics implements ShouldQueue
      */
     public function handle()
     {
-        // Fetch user task counts using Eloquent's withCount
+        # Get all users with the number of tasks they have assigned
         $users = User::withCount('assignedTasks')->get();
 
+        # Update the task count for each user or create a new record if it doesn't exist
         foreach ($users as $user) {
             TaskStatistic::updateOrCreate(
                 ['user_id' => $user->id],

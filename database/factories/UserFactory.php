@@ -17,13 +17,16 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        // Check if the user is an admin if true set as 'admin' else 'password'
+        $password = $this->faker->boolean ? bcrypt('admin') : bcrypt('password');
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => bcrypt('password'), // password
-            'remember_token' => Str::random(10),
-            'is_admin' => false, // Default to false for regular users
+            'name' => fake()->name(), // Random name
+            'email' => fake()->unique()->safeEmail(), // Unique email
+            'email_verified_at' => now(), // Set email as verified
+            'password' => $password, // Set password based on user type
+            'remember_token' => Str::random(10), // Random token for password reset
+            'is_admin' => $this->faker->boolean, // Set as admin or not
         ];
     }
 

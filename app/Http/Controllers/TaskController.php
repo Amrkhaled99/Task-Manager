@@ -12,9 +12,9 @@ class TaskController extends Controller
 
     public function index()
     {
-        // Assuming Task has 'assignedTo' and 'assignedBy' relationships defined
+        // Get a paginated list of tasks, including details of who the task is assigned to and who assigned it
         $tasks = Task::with(['assignedTo', 'assignedBy'])->paginate(10);
-
+        // Pass the tasks to the view
         return view('tasks.index', compact('tasks'));
     }
 
@@ -25,11 +25,14 @@ class TaskController extends Controller
         $admins = User::where('is_admin', true)->pluck('name', 'id');
         $users = User::where('is_admin', false)->pluck('name', 'id');
 
+        // Show the task creation form with the lists of admins and users
         return view('tasks.create', compact('admins', 'users'));
     }
 
     public function store(Request $request)
     {
+
+        // Validate the incoming request data
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -37,14 +40,13 @@ class TaskController extends Controller
             'assigned_by_id' => 'required|exists:users,id',
         ]);
 
-        // Create a new task
+        // Create a new task with the validated data
         Task::create($request->all());
 
-        // Dispatch the UpdateStatisticsJob to recalculate statistics
+        // Recalculate task statistics in the background ( Update task statistics )
         UpdateTaskStatistics::dispatch();
 
-
-        // Redirect to the task list page
-        return redirect()->route('tasks.create');
+        // Redirect to the list of tasks
+        return redirect()->route('tasks');
     }
 }

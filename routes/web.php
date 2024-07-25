@@ -19,16 +19,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-  // ################################## Tasks ##################################
+// ################################## Tasks ##################################
 
-   Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
 
-    // Route to display the creation form for tasks (Admin view)
-    Route::get('/tasks/create', [TaskController::class, 'createUser'])->name('tasks.create');
+// Route to display the creation form for tasks (Admin view)
+Route::get('/tasks/create', [TaskController::class, 'createUser'])->name('tasks.create');
 
-    // Route to handle the creation and storage of new tasks
-    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+// Route to handle the creation and storage of new tasks
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks');
 
-     // ################################## Statistics ##################################
-    Route::get('tasks/statistics', [StatisticController::class, 'index'])->name('statistics.index');
+// Route to display the list of tasks
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+
+
+// ################################## Statistics ##################################
+
+// Route to display statistics
+Route::get('/tasks/statistics', [StatisticController::class, 'index'])->name('statistics.index');
 
